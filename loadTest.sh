@@ -1,0 +1,1 @@
+mvn gatling:test -Dgatling.simulationClass=LoadSimulation -Dbase.url=http://localhost:8091/ -Dtest.path=hello/100 -Dsim.users=20000

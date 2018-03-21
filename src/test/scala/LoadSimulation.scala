@@ -1,4 +1,6 @@
-package scala
+import io.gatling.core.scenario.Simulation
+import io.gatling.core.Predef._
+import io.gatling.http.Predef._
 
 import scala.concurrent.duration._
 
@@ -28,4 +30,5 @@ class LoadSimulation extends Simulation {
 
   // 配置并发用户的数量在30秒内均匀提高至sim_users指定的数量
   setUp(scn.inject(rampUsers(sim_users).over(30 seconds)).protocols(httpConf))
+
 }
