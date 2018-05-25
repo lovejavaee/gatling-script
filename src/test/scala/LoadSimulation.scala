@@ -1,5 +1,5 @@
-import io.gatling.core.scenario.Simulation
 import io.gatling.core.Predef._
+import io.gatling.core.scenario.Simulation
 import io.gatling.http.Predef._
 
 import scala.concurrent.duration._
@@ -10,13 +10,15 @@ class LoadSimulation extends Simulation {
   val baseUrl = System.getProperty("base.url")
   val testPath = System.getProperty("test.path")
   val sim_users = System.getProperty("sim.users").toInt
+  val test_name = System.getProperty("test.name")
 
   val httpConf = http.baseURL(baseUrl)
 
   // 定义模拟的请求，重复30次
   val helloRequest = repeat(30) {
     // 自定义测试名称
-    exec(http("hello-with-latency")
+    // exec(http("hello-with-latency")
+    exec(http(test_name)
       // 执行get请求
       .get(testPath))
       // 模拟用户思考时间，随机1~2秒钟
@@ -30,5 +32,4 @@ class LoadSimulation extends Simulation {
 
   // 配置并发用户的数量在30秒内均匀提高至sim_users指定的数量
   setUp(scn.inject(rampUsers(sim_users).over(30 seconds)).protocols(httpConf))
-
 }
